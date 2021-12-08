@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://media.istockphoto.com/vectors/alarm-clock-icon-wake-up-time-vector-design-on-white-background-vector-id1213927716?b=1&k=20&m=1213927716&s=170667a&w=0&h=IQOFraVXx0FBwsOQO9O468cX1Zkd8betoNqHK69xfps=">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;400;600&display=swap');
+
+        *{
+            font-family: 'Titillium Web', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .design{
+            height: 100vh;
+            background: #000000f0;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+        .digitalClock{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #000000;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0px 0px 16px 0px #0037ff;
+        }
+        span{
+            color: #fff;
+            font-size: 50px;
+        }
+        .time{
+            margin-bottom: 10px;
+        }
+        .amPm{
+            margin-left: 3px;
+            background-color: green;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .hour{
+            background-color: red;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .fullDate{
+            background-color: yellow;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: 700;
+        }
+        @media(max-width:650px){
+            span{font-size: 32px;}
+        }
+        @media(max-width:460px){
+            .time{display: flex; align-items: flex-end;}
+            .amPm{font-size: 15px;}
+            .fullDate{font-size: 25px;}
+        }
+        @media(max-width:375px){
+            .fullDate{font-size: 20px;}
+            .time{display: flex; align-items: flex-end;}
+            .amPm{font-size: 15px;}
+        }
+    </style>
+    <title>Digital Watch</title>
+</head>
+<body>
+    <div class="design">
+        <div class="digitalClock">
+            <div class="time">
+            <span class="hour"></span>
+            <span class="amPm"></span>
+            </div>
+            <span class="fullDate"></span>
+        </div>
+    </div>
+
+
+
+<script>
+    function digitalWatch() {
+        var myDate = new Date();
+        var hr = (myDate.getHours()<10) ? "0" + myDate.getHours() : myDate.getHours(),
+            min = (myDate.getMinutes()<10) ? "0" + myDate.getMinutes() : myDate.getMinutes(),
+            sec = (myDate.getSeconds() < 10) ? "0" + myDate.getSeconds() : myDate.getSeconds(),
+            amPm = (myDate.getHours() >= 12) ? "PM" : "AM";
+
+        if (myDate.getHours() == 0) {
+            hr = 12;
+        }else if(myDate.getHours() > 12){
+            hr = myDate.getHours() - 12;
+        }else{
+            myDate.getHours();
+        }
+
+        let currentTime = hr + ":" + min + ":" + sec ;
+        let amPmShow = amPm;
+        document.querySelector(".hour").innerHTML = currentTime;
+        document.querySelector(".amPm").innerHTML = amPmShow;
+
+        let myDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let myMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October","November", "December"];
+        let day = myDate.getDate();
+        let currentDay = myDays[myDate.getDay()] + ", " + day + " " +myMonth[myDate.getMonth()] + " " + myDate.getFullYear();
+        document.querySelector(".fullDate").innerHTML = currentDay;
+    }
+    digitalWatch();
+    setInterval(() => {
+        digitalWatch();
+    }, 1000);
+</script>
+</body>
+</html>
